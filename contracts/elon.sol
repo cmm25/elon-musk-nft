@@ -1,11 +1,29 @@
 // SPDX-License-Identifier: UNLICENSED
 
-pragma solidity ^0.8.9; //this is the version of the solidity we are using in this contract.
+pragma solidity ^0.8.20;
 
-import "hardhat/console.sol"; //this is given to us by hardhat to debug our code. It is very helpful in local environment.
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "hardhat/console.sol";
 
-contract ElonNFT {
-    constructor() {
-        console.log("This is my Elon Musk NFT contract!!");
+contract ElonNFT is ERC721URIStorage {
+
+    //Counters.Counter private _tokenIds -- replaced with below
+    uint private _tokenIds;
+
+    constructor() ERC721("ElonMusk", "ELON") {}
+
+    function mintNFT() public returns (uint256) {
+        // _tokenIds.increment() -- replaced with below
+        _tokenIds++;
+        //uint256 newItemId = _tokenIds.current(); -- replaced with below
+        uint newItemId = _tokenIds;
+        _mint(msg.sender, newItemId);
+        _setTokenURI(newItemId, "hello world");
+        console.log(
+            "The NFT ID %s has been minted to %s",
+            newItemId,
+            msg.sender
+        );
+        return newItemId;
     }
 }

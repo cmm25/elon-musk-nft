@@ -7,13 +7,13 @@ import "hardhat/console.sol";
 
 contract ElonNFT is ERC721URIStorage {
 
-    //Counters.Counter private _tokenIds -- replaced with below
+   
     uint private _tokenIds;
 
     constructor() ERC721("ElonMusk", "ELON") {}
 
     function mintNFT() public returns (uint256) {
-        // _tokenIds.increment() -- replaced with below
+       
         _tokenIds++;
         //uint256 newItemId = _tokenIds.current(); -- replaced with below
         uint newItemId = _tokenIds;
